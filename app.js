@@ -26,11 +26,13 @@ function submitForm(e){
     e.preventDefault();
 }
 
+//delete task
 function deleteTasks(e){
 
     if(e.target.classList.contains("removetask")){
         
             e.target.parentElement.parentElement.parentElement.remove();
+            //delete task from db
             deleteTaskInDb(e.target.parentElement.parentElement.firstChild.textContent);
             let toastContent = $(`<span>${e.target.parentElement.parentElement.firstChild.textContent} ~ has been removed</span>`).add($('<button class="btn-flat toast-action" id="undoaction">Undo</button>'));
                 Materialize.toast(toastContent, 10000);
@@ -55,6 +57,7 @@ function undoDeleteTasks(e){
     saveTask(val);
     e.preventDefault();
 }
+
 //search tasks
 function searchTasks(e){
 
@@ -66,13 +69,9 @@ function searchTasks(e){
         eachVal.forEach((v)=>{
 
             if(v.firstChild.textContent.search(search) != -1){
-
                 v.style.display =  'block';
-
             }else{
-
                 v.style.display =  'none';
-
             }
         });
 
@@ -84,6 +83,7 @@ function searchTasks(e){
     }
     e.preventDefault();
 }
+
 //save task
 function saveTask(val){
 
@@ -104,6 +104,7 @@ function saveTask(val){
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
 }
+
 //fetch from local db
 function populateDom(){
     
@@ -123,6 +124,7 @@ function populateDom(){
     }
 
 }
+
 //delete task
 function deleteTaskInDb(val){
 
