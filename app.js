@@ -14,6 +14,7 @@ function submitForm(e){
     let val = task.value;
     if(val.length != 0){
 
+        //save the task to db
         saveTask(val);
 
         let html = document.createElement("li");
@@ -49,8 +50,9 @@ function undoDeleteTasks(e){
         html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
     document.querySelector("#taskerList").appendChild(html);
     document.querySelector("#undoaction").parentElement.remove();
-    
-        saveTask(val);
+
+    //save the undo task again
+    saveTask(val);
     e.preventDefault();
 }
 //search tasks
