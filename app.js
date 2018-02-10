@@ -52,16 +52,29 @@ function undoDeleteTasks(e){
 function searchTasks(e){
 
     let search = tasksearch.value;
-    let eachVal = document.querySelectorAll(".collection-item #taskvall");
+    let eachVal = document.querySelectorAll(".collection-item");
 
     if(eachVal.length != 0){
 
-        Array.from(eachVal).forEach((v)=>{
+        eachVal.forEach((v)=>{
+            //console.log(v);
+            if(v.firstChild.textContent.search(search) != -1){
+                document.querySelectorAll(".collection-item").forEach(()=>{
+                    v.style.display =  'block';
+                });
+                console.log(`${v.firstChild.textContent} is equal to ${search}`);
 
-            if(v.textContent.search() != -1){
-                
+            }else{
 
+                document.querySelectorAll(".collection-item").forEach(()=>{
+                    v.style.display =  'none';
+                });
             }
+        });
+
+    }else{
+        document.querySelectorAll(".collection-item").forEach(()=>{
+            v.style.display =  'block';
         });
 
     }
