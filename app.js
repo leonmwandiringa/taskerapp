@@ -28,12 +28,12 @@ function deleteTasks(e){
     if(e.target.classList.contains("removetask")){
         
             e.target.parentElement.parentElement.parentElement.remove();
-
-            let toastContent = $(`<span>${e.target.parentElement.parentElement.textContent} ~ has been removed</span>`).add($('<button class="btn-flat toast-action" id="undoaction">Undo</button>'));
+            deleteTaskInDb(e.target.parentElement.parentElement.firstChild.textContent);
+            let toastContent = $(`<span>${e.target.parentElement.parentElement.firstChild.textContent} ~ has been removed</span>`).add($('<button class="btn-flat toast-action" id="undoaction">Undo</button>'));
             Materialize.toast(toastContent, 10000);
             document.querySelector("#undoaction").addEventListener("click", undoDeleteTasks);
 
-            console.log();
+            //console.log();
 
         
     }
@@ -102,9 +102,9 @@ function saveTask(val){
 
 function populateDom(){
     
-    if(localStorage.getItem("tasks") == null){
+    if(localStorage.getItem("tasks") != null){
 
-        tasks = JSON.parse(localStorage.getItem('tasks'));
+        let tasks = JSON.parse(localStorage.getItem('tasks'));
 
         tasks.forEach((val)=>{
 
@@ -114,6 +114,23 @@ function populateDom(){
             document.querySelector("#taskerList").appendChild(html);
 
         });
+
+    }
+
+}
+
+function deleteTaskInDb(val){
+
+    if(localStorage.getItem("tasks") != null){
+
+        let tasks = JSON.parse(localStorage.getItem('tasks'));
+        
+        if(tasks.indexOf(val) != -1){
+
+            tasks.splice(tasks.indexOf(val), 1);
+        }
+
+        localStorage.setItem('tasks', JSON.stringify(tasks));
 
     }
 
