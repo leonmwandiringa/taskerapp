@@ -14,7 +14,7 @@ function submitForm(e){
 
         let html = document.createElement("li");
         html.classList.add("collection-item");
-        html.innerHTML = `<div>${val}<a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+        html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
         document.querySelector("#taskerList").appendChild(html);
 
     }
@@ -25,7 +25,7 @@ function deleteTasks(e){
 
     if(e.target.classList.contains("removetask")){
         
-            e.target.parentElement.parentElement.parentElement.remove()
+            e.target.parentElement.parentElement.parentElement.remove();
 
             let toastContent = $(`<span>${e.target.parentElement.parentElement.textContent} ~ has been removed</span>`).add($('<button class="btn-flat toast-action" id="undoaction">Undo</button>'));
             Materialize.toast(toastContent, 10000);
@@ -43,12 +43,28 @@ function undoDeleteTasks(e){
     let val = task.split("~")[0];
     let html = document.createElement("li");
         html.classList.add("collection-item");
-        html.innerHTML = `<div>${val}<a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+        html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
         document.querySelector("#taskerList").appendChild(html);
-
+        document.querySelector("#undoaction").parentElement.remove();
     e.preventDefault();
 }
+
 function searchTasks(e){
 
+    let search = tasksearch.value;
+    let eachVal = document.querySelectorAll(".collection-item #taskvall");
+
+    if(eachVal.length != 0){
+
+        Array.from(eachVal).forEach((v)=>{
+
+            if(v.textContent.search() != -1){
+                
+
+            }
+        });
+
+    }
+    console.log(eachVal.length);
     e.preventDefault();
 }
