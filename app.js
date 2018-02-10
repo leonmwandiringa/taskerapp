@@ -59,16 +59,13 @@ function searchTasks(e){
         eachVal.forEach((v)=>{
             //console.log(v);
             if(v.firstChild.textContent.search(search) != -1){
-                document.querySelectorAll(".collection-item").forEach(()=>{
+
                     v.style.display =  'block';
-                });
-                console.log(`${v.firstChild.textContent} is equal to ${search}`);
 
             }else{
 
-                document.querySelectorAll(".collection-item").forEach(()=>{
                     v.style.display =  'none';
-                });
+
             }
         });
 
@@ -78,6 +75,5 @@ function searchTasks(e){
         });
 
     }
-    console.log(eachVal.length);
     e.preventDefault();
 }
