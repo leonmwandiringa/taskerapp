@@ -26,7 +26,7 @@ function submitForm(e){
     e.preventDefault();
 }
 
-//delete task
+//delete chosen task
 function deleteTasks(e){
 
     if(e.target.classList.contains("removetask")){
