@@ -19,7 +19,7 @@ function submitForm(e){
 
         let html = document.createElement("li");
             html.classList.add("collection-item");
-            html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+            html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content tooltipped" data-position="right" data-delay="50" data-tooltip="Delete Task"><i class="material-icons removetask">delete</i></a></div>`;
         document.querySelector("#taskerList").appendChild(html);
 
     }
@@ -49,7 +49,7 @@ function undoDeleteTasks(e){
     let val = task.split("~")[0];
     let html = document.createElement("li");
         html.classList.add("collection-item");
-        html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+        html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content tooltipped" data-position="right" data-delay="50" data-tooltip="Delete Task"><i class="material-icons removetask">delete</i></a></div>`;
     document.querySelector("#taskerList").appendChild(html);
     document.querySelector("#undoaction").parentElement.remove();
 
@@ -115,7 +115,7 @@ function populateDom(){
 
             var html = document.createElement("li");
             html.classList.add("collection-item");
-                html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+                html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content tooltipped" data-position="right" data-delay="50" data-tooltip="Delete Task"><i class="material-icons removetask">delete</i></a></div>`;
             document.querySelector("#taskerList").appendChild(html);
 
         });
