@@ -48,6 +48,8 @@ function undoDeleteTasks(e){
         html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
         document.querySelector("#taskerList").appendChild(html);
         document.querySelector("#undoaction").parentElement.remove();
+    
+        saveTask(val);
     e.preventDefault();
 }
 
@@ -135,3 +137,4 @@ function deleteTaskInDb(val){
     }
 
 }
+
