@@ -4,13 +4,15 @@ let tasksearch = document.querySelector("#taskersearch");
 document.querySelector("#submitform").addEventListener("submit", submitForm);
 document.querySelector("#taskersearch").addEventListener("keyup", searchTasks);
 document.querySelector("#taskerList").addEventListener("click", deleteTasks);
-
+populateDom();
 
 
 function submitForm(e){
 
     let val = task.value;
     if(val.length != 0){
+
+        saveTask(val);
 
         let html = document.createElement("li");
         html.classList.add("collection-item");
@@ -57,14 +59,14 @@ function searchTasks(e){
     if(eachVal.length != 0){
 
         eachVal.forEach((v)=>{
-            //console.log(v);
+
             if(v.firstChild.textContent.search(search) != -1){
 
-                    v.style.display =  'block';
+                v.style.display =  'block';
 
             }else{
 
-                    v.style.display =  'none';
+                v.style.display =  'none';
 
             }
         });
@@ -76,4 +78,43 @@ function searchTasks(e){
 
     }
     e.preventDefault();
+}
+
+function saveTask(val){
+
+    let task = val;
+    let tasks;
+
+    if(localStorage.getItem("tasks") == null){
+
+        tasks = [];
+
+    }else{
+        //tasks = [];
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+
+    }
+
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+}
+
+function populateDom(){
+    
+    if(localStorage.getItem("tasks") == null){
+
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+
+        tasks.forEach((val)=>{
+
+            var html = document.createElement("li");
+            html.classList.add("collection-item");
+            html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+            document.querySelector("#taskerList").appendChild(html);
+
+        });
+
+    }
+
 }
