@@ -4,6 +4,8 @@ let tasksearch = document.querySelector("#taskersearch");
 document.querySelector("#submitform").addEventListener("submit", submitForm);
 document.querySelector("#taskersearch").addEventListener("keyup", searchTasks);
 document.querySelector("#taskerList").addEventListener("click", deleteTasks);
+
+//run db dom pp
 populateDom();
 
 
@@ -15,8 +17,8 @@ function submitForm(e){
         saveTask(val);
 
         let html = document.createElement("li");
-        html.classList.add("collection-item");
-        html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+            html.classList.add("collection-item");
+            html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
         document.querySelector("#taskerList").appendChild(html);
 
     }
@@ -30,15 +32,14 @@ function deleteTasks(e){
             e.target.parentElement.parentElement.parentElement.remove();
             deleteTaskInDb(e.target.parentElement.parentElement.firstChild.textContent);
             let toastContent = $(`<span>${e.target.parentElement.parentElement.firstChild.textContent} ~ has been removed</span>`).add($('<button class="btn-flat toast-action" id="undoaction">Undo</button>'));
-            Materialize.toast(toastContent, 10000);
+                Materialize.toast(toastContent, 10000);
             document.querySelector("#undoaction").addEventListener("click", undoDeleteTasks);
-
-            //console.log();
-
         
     }
     e.preventDefault();
 }
+
+//undo delete
 function undoDeleteTasks(e){
 
     let task = document.querySelector("#undoaction").parentElement.querySelector("span").textContent;
@@ -46,13 +47,13 @@ function undoDeleteTasks(e){
     let html = document.createElement("li");
         html.classList.add("collection-item");
         html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
-        document.querySelector("#taskerList").appendChild(html);
-        document.querySelector("#undoaction").parentElement.remove();
+    document.querySelector("#taskerList").appendChild(html);
+    document.querySelector("#undoaction").parentElement.remove();
     
         saveTask(val);
     e.preventDefault();
 }
-
+//search tasks
 function searchTasks(e){
 
     let search = tasksearch.value;
@@ -81,7 +82,7 @@ function searchTasks(e){
     }
     e.preventDefault();
 }
-
+//save task
 function saveTask(val){
 
     let task = val;
@@ -101,7 +102,7 @@ function saveTask(val){
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
 }
-
+//fetch from local db
 function populateDom(){
     
     if(localStorage.getItem("tasks") != null){
@@ -112,7 +113,7 @@ function populateDom(){
 
             var html = document.createElement("li");
             html.classList.add("collection-item");
-            html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
+                html.innerHTML = `<div><span id="taskvall">${val}</span><a href="javascript:void(0)" class="secondary-content"><i class="material-icons removetask">delete</i></a></div>`;
             document.querySelector("#taskerList").appendChild(html);
 
         });
@@ -120,7 +121,7 @@ function populateDom(){
     }
 
 }
-
+//delete task
 function deleteTaskInDb(val){
 
     if(localStorage.getItem("tasks") != null){
