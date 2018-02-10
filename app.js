@@ -95,9 +95,8 @@ function saveTask(val){
         tasks = [];
 
     }else{
-        //tasks = [];
-        tasks = JSON.parse(localStorage.getItem('tasks'));
 
+        tasks = JSON.parse(localStorage.getItem('tasks'));
     }
 
     tasks.push(task);
